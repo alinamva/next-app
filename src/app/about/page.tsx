@@ -3,8 +3,8 @@ import React from "react";
 
 const AboutPage = () => {
   return (
-    <div className="grid grid-cols-2 justify-between">
-      <div className="flex justify-between flex-col items-start">
+    <div className="flex justify-between">
+      <div className="flex justify-between flex-col items-start md:w-1/2  w-full">
         <h3>About Agency</h3>
         <h2>
           We create digital ideas that are bigger, bolder, braver and better
@@ -30,7 +30,7 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-end">
+      <div className="hidden md:flex justify-end">
         <Image
           src="/about.png"
           alt="hero"

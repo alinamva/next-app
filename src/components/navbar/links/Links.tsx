@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import NavLink from "./navLink";
+import Image from "next/image";
 interface Link {
   path: string;
   title: string;
@@ -52,14 +53,16 @@ const Links = () => {
           <NavLink item={{ title: "Login", path: "/login" }} />
         )}
       </div>
-      <button
+      <Image
+        width={30}
+        height={30}
+        src="/menu.png"
+        alt="menu"
         onClick={() => setOpen((prev) => !prev)}
         className="flex md:hidden"
-      >
-        Menu
-      </button>
+      />
       {open && (
-        <div className="absolute top-24 min-h-[87%] w-1/2 right-0 flex flex-col items-center justify-center gap-3 overflow-hidden md:hidden ">
+        <div className="absolute border-l border-gray-600 bg-bg top-24 min-h-[87%]  w-1/2 right-0 flex flex-col items-center justify-center gap-3 overflow-hidden md:hidden ">
           {links.map((link) => (
             <NavLink
               item={link}
