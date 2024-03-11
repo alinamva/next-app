@@ -1,7 +1,8 @@
+import { PostProps } from "@/app/blog/page";
 import Image from "next/image";
 import Link from "next/link";
 
-const PostCard = () => {
+const PostCard: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col gap-4">
@@ -14,15 +15,10 @@ const PostCard = () => {
           />
         </div>
         <div className="flex flex-col gap-1">
-          <h4>Title</h4>
-          <p className="text-gray-300 text-sm font-extralight">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque
-            debitis autem ad nemo doloremque nisi fugit aliquam cupiditate saepe
-            molestias consequuntur iure facere modi qui, ipsum tempora veniam
-            dolorem expedita.
-          </p>
+          <h4>{post.title}</h4>
+          <p className="text-gray-300 text-sm font-extralight">{post.body}</p>
           <Link
-            href="/blog/posts"
+            href={`/blog/${post.id}`}
             className="underline"
           >
             Read more

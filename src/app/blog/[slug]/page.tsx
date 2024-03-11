@@ -1,7 +1,19 @@
+import PostUser from "@/components/postUser/postUser";
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 
-const SinglePostPage = () => {
+const getData = async (slug) => {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  return res.json();
+};
+const SinglePostPage = async ({ params }) => {
+  const { slug } = params;
+  const post = await getData(slug);
+
   return (
     <div className="flex gap-12">
       <div className="hidden md:flex">
@@ -13,7 +25,7 @@ const SinglePostPage = () => {
         />
       </div>
       <div className="flex flex-col gap-3 items-start">
-        <h2>Title</h2>
+        <h2>{post.title}</h2>
         <div className="flex gap-4 items-center justify-center">
           <Image
             src="/noavatar.png"
@@ -23,12 +35,9 @@ const SinglePostPage = () => {
             className="rounded-full"
           />
           <div className="flex gap-4">
-            <div className="flex flex-col justify-between gap-1">
-              <span className="text-sm text-gray-400 font-semibold">
-                Author
-              </span>
-              <span>Terry Jefferson</span>
-            </div>
+            <Suspense fallback={<div>...Loading</div>}>
+              <PostUser userId={post.id} />
+            </Suspense>
             <div className=" flex flex-col gap-1">
               <span className="text-sm text-gray-400 font-semibold">
                 Published
@@ -37,12 +46,7 @@ const SinglePostPage = () => {
             </div>
           </div>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam
-          consectetur est, mollitia illum nobis odit, tempora reprehenderit,
-          iure nulla doloribus nihil quis enim blanditiis error temporibus
-          laudantium rem dolor quas?
-        </p>
+        <p>{post.body}</p>
       </div>
     </div>
   );
