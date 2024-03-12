@@ -1,18 +1,22 @@
-import PostUser from "@/components/postUser/postUser";
+import { getPost } from "@/components/lib/data";
+// import PostUser from "@/components/postUser/postUser";
 import Image from "next/image";
 import React, { Suspense } from "react";
+import { Post } from "../page";
 
-const getData = async (slug) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+// const getData = async (slug: string) => {
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
 
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
-  return res.json();
-};
-const SinglePostPage = async ({ params }) => {
+//   if (!res.ok) {
+//     throw new Error("Something went wrong");
+//   }
+//   return res.json();
+// };
+const SinglePostPage: React.FC<Post> = async ({ params }) => {
   const { slug } = params;
-  const post = await getData(slug);
+  const post = await getPost(slug);
+
+  console.log(post);
 
   return (
     <div className="flex gap-12">
@@ -35,9 +39,9 @@ const SinglePostPage = async ({ params }) => {
             className="rounded-full"
           />
           <div className="flex gap-4">
-            <Suspense fallback={<div>...Loading</div>}>
+            {/* <Suspense fallback={<div>...Loading</div>}>
               <PostUser userId={post.id} />
-            </Suspense>
+            </Suspense> */}
             <div className=" flex flex-col gap-1">
               <span className="text-sm text-gray-400 font-semibold">
                 Published
@@ -46,7 +50,7 @@ const SinglePostPage = async ({ params }) => {
             </div>
           </div>
         </div>
-        <p>{post.body}</p>
+        <p>{post.desc}</p>
       </div>
     </div>
   );

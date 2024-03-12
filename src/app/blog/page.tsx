@@ -1,14 +1,17 @@
+import { getPosts } from "@/components/lib/data";
 import PostCard from "@/components/postCard/postCard";
-import React from "react";
-// export interface Post {
-//   userId: number;
-//   id: number;
-//   title: string;
-//   body: string;
-// }
-// export interface PostProps {
-//   post: Post;
-// }
+
+export interface Post {
+  post: {
+    userId: number;
+    id: string;
+    title: string;
+    desc: string;
+    slug: string;
+    img: string;
+  };
+}
+
 // const getData = async () => {
 //   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
 //     next: { revalidate: 3600 },
@@ -21,8 +24,8 @@ import React from "react";
 // };
 
 const BlogPage = async () => {
-  // const posts: Post[] = await getData();
-
+  const posts = await getPosts();
+  console.log(posts);
   return (
     <div className="grid grid-cols-3 place-items-center gap-8">
       {posts.map((post) => (
