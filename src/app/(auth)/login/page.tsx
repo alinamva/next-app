@@ -1,7 +1,12 @@
-import React from "react";
-
-const LoginPage = () => {
-  return <div>LoginPage</div>;
+import { handeGithubLogin } from "@/components/lib/actions";
+const LoginPage = async () => {
+  return (
+    <div>
+      <form action={handeGithubLogin}>
+        <button>Login with Github</button>
+      </form>
+    </div>
+  );
 };
 
 export default LoginPage;

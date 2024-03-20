@@ -4,6 +4,8 @@ import Link from "next/link";
 
 const PostCard: React.FC<Post> = ({ post }) => {
   console.log("post:", post);
+  console.log(post.slug);
+
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col gap-4">

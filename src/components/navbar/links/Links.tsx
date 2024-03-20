@@ -2,6 +2,7 @@
 import { useState } from "react";
 import NavLink from "./navLink";
 import Image from "next/image";
+import { handleLogout } from "@/components/lib/actions";
 interface Link {
   path: string;
   title: string;
@@ -28,10 +29,9 @@ const links = [
     path: "/contact",
   },
 ];
-const Links = () => {
+const Links = ({ session }) => {
   const [open, setOpen] = useState(false);
 
-  const session = true;
   const isAdmin = true;
   return (
     <div>
@@ -42,12 +42,16 @@ const Links = () => {
             key={link.title}
           />
         ))}
-        {session ? (
+        {session?.user ? (
           <>
-            {isAdmin && <NavLink item={{ title: "Admin", path: "/admin" }} />}
-            <button className="p-2 cursor-pointer font-bold bg-text text-bg rounded">
-              Logout
-            </button>
+            {session.user?.isAdmin && (
+              <NavLink item={{ title: "Admin", path: "/admin" }} />
+            )}
+            <form action={handleLogout}>
+              <button className="p-2 cursor-pointer font-bold bg-text text-bg rounded">
+                Logout
+              </button>
+            </form>
           </>
         ) : (
           <NavLink item={{ title: "Login", path: "/login" }} />

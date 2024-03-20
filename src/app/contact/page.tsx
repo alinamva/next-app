@@ -1,5 +1,9 @@
+import { Metadata } from "next";
 import Image from "next/image";
-
+export const metadata: Metadata = {
+  title: "Contact page",
+  description: "Contact page description",
+};
 const ContactPage = () => {
   return (
     <div className="grid grid-cols-2 gap-16 justify-between items-center">
